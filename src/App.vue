@@ -70,6 +70,7 @@ const onMouseout = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
 }
 video {
   width: 100vmin;
