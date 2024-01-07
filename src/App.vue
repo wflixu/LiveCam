@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from "vue";
 import { LogicalPosition, appWindow } from "@tauri-apps/api/window";
 const vd = ref<HTMLVideoElement>();
 onMounted(() => {
-  const constraints = { audio: true, video: { width: 720, height: 720 } };
+  const constraints = { audio: false, video: { width: 720, height: 720 } };
 
   navigator.mediaDevices
     .getUserMedia(constraints)
@@ -74,7 +74,7 @@ const onMouseout = async () => {
 }
 video {
   width: 100vmin;
-  height: 100vin;
+  height: 100vmin;
   box-sizing: border-box;
   border-radius: 50%;
   border: 4px solid rebeccapurple;
