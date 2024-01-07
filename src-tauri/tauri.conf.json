@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "icamera",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "tauri": {
     "macOSPrivateApi":true,
@@ -41,7 +41,10 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": "all",
+      "targets": [
+        "dmg",
+        "updater"
+      ],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
@@ -52,17 +55,22 @@
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+        "https://github.com/wflixu/icamera/releases/download/v0.1.2/latest.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQyMEYyMjlBOEFCRjM4RDcKUldUWE9MK0ttaUlQMHFVdmE1cDA5b1l6TmlHTjloWTh4cWw1bGl3WTU1OEg1cmpsam94bCt4RHcK"
     },
     "windows": [
       {
         "fullscreen": false,
         "height": 400,
+        "width": 400,
         "resizable": true,
         "transparent": true,
         "hiddenTitle":true,
-        "width": 400,
-        "titleBarStyle":"Visible"
+        "titleBarStyle":"Overlay"
       }
     ]
   }
