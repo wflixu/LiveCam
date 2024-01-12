@@ -12,13 +12,9 @@
   -webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
-  background-color: transparent;
+  margin: 0;  
+}
+#app {
+  height: 100vh;
 }
 
-.container {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}

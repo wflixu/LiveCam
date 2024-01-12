@@ -1,82 +1,77 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
-import { LogicalPosition, appWindow } from "@tauri-apps/api/window";
-const vd = ref<HTMLVideoElement>();
-onMounted(() => {
-  const constraints = { audio: false, video: { width: 720, height: 720 } };
+import { onMounted, reactive, ref, onUnmounted, getCurrentInstance } from "vue";
+import {
+  LogicalPosition,
+  LogicalSize,
+  PhysicalSize,
+  appWindow,
+} from "@tauri-apps/api/window";
+import { listen } from "@tauri-apps/api/event";
+import Camera from "./Camera.vue";
+import SettingBar from "./SettingBar.vue";
 
-  navigator.mediaDevices
-    .getUserMedia(constraints)
-    .then(function (mediaStream) {
-      if (vd.value) {
-        vd.value.srcObject = mediaStream;
-        vd.value.onloadedmetadata = function (e) {
-          if (vd.value) {
-            vd.value.play();
-          }
-        };
-      }
-    })
-    .catch(function (err) {
-      console.log(err.name + ": " + err.message);
-    }); // 总是在最后检查错误
+const showSettings = ref(false);
+
+const width = ref("100px");
+let unlisten: Function;
+const initWin = async (w: number, h: number) => {
+
+  const nw = w >= h - 15 ? w : h;
+  width.value = nw + "px";
+  const ns = new PhysicalSize(nw, nw + 15);
+  await appWindow.setSize(ns);
+};
+
+listen<string>("tauri://resize", (event) => {
+  console.log(event.payload);
+  const { width, height } = event.payload as unknown as {
+    width: number;
+    height: number;
+  };
+  initWin(width, height)
+    .then(() => {})
+    .catch((err) => {});
+}).then((fn) => {
+  unlisten = fn;
 });
-const pos = reactive({ screenX, screenY });
-const flag = ref(false);
-const onMousedown = async (e: MouseEvent) => {
-  flag.value = true;
-  // const position = await appWindow.innerPosition();
-  // const factor = await appWindow.scaleFactor();
-  // const LogicalPosition = position.toLogical(factor);
-  // const size = await appWindow.innerSize();
-  // const logicalSize = size.toLogical(factor);
-  // console.warn(e.screenX, e.screenY);
-  // console.warn(LogicalPosition, size, logicalSize);
+
+
+
+const mouseenterHandler = (event: MouseEvent) => {
+  showSettings.value = true;
 };
-const onMousemove = async (e: MouseEvent) => {
-  // console.log(e.screenX, e.screenY);
-  if (flag.value) {
-    await appWindow.setPosition(
-      new LogicalPosition(e.screenX - 140, e.screenY - 140)
-    );
+
+const mouseleaveHandler = (event:MouseEvent) =>{
+  showSettings.value = false;
+}
+onMounted(async () => {
+  const psize = await appWindow.innerSize();
+  initWin(psize.width, psize.height)
+    .then(() => {})
+    .catch((err) => {});
+ 
+});
+
+onUnmounted(() => {
+  if (unlisten) {
+    unlisten();
   }
-};
-const onMouseup = () => {
-  flag.value = false;
-};
-const onMouseover = async () => {
-  await appWindow.setDecorations(true);
-};
-const onMouseout = async () => {
-  await appWindow.setDecorations(false);
-};
+});
+
+
 </script>
 
 <template>
-  <div
-    class="container"
-    @mousedown="onMousedown"
-    @mousemove="onMousemove"
-    @mouseup="onMouseup"
-    @mouseenter="onMouseover"
-    @mouseleave="onMouseout"
-  >
-    <video class="v" ref="vd"></video>
+  <div class="container"  @mouseenter="mouseenterHandler" @mouseleave="mouseleaveHandler">
+    <Camera :width="width" />
+    <SettingBar v-show="showSettings" />
   </div>
 </template>
 
 <style scoped>
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-}
-video {
-  width: 100vmin;
-  height: 100vmin;
-  box-sizing: border-box;
+
+  position: relative;
   border-radius: 50%;
-  border: 4px solid rebeccapurple;
 }
 </style>
