@@ -1,39 +1,54 @@
 <template>
-  <div class="camera" :style="styleObj">
+  <div
+    class="camera"
+    :style="styleObj"
+    @mousedown="mousedownHandler"
+    @mouseup="mouseupHandler"
+    @mousemove="mousemoveHandler"
+    @mouseleave="mouseleaveHandler"
+  >
     <video ref="vd" :style="vstyleObj"></video>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, computed } from "vue";
-import { ICameraProps } from "./interface";
+import { useWinMove } from "../hooks";
+import { useSystemStoreHook } from "../store";
 
-const props = withDefaults(defineProps<ICameraProps>(), {
-  width: '100px',
-  circle: true,
-  borderWidth: '2px',
-  borderColor: "rebeccapurple",
-});
+const {
+  mousedownHandler,
+  mouseupHandler,
+  mousemoveHandler,
+  mouseleaveHandler,
+} = useWinMove();
+
+
+const systemStore = useSystemStoreHook();
+
+const config = systemStore.config;
+
 
 const styleObj = computed(() => {
   return {
-    width: props.width ,
-    height: props.width,
+    width: config.size + 'px',
+    height: config.size + 'px',
   };
 });
 
 const vstyleObj = computed(() => {
   return {
-    borderRadius: props.circle ? "50%" : "none",
-    borderWidth: props.borderWidth ,
-    borderColor: props.borderColor,
+    borderRadius: config.circle ? "50%" : "none",
+    borderWidth: config.hasBorder? config.borderWidth + 'px' : '0px',
+    borderColor: config.borderColor,
   };
 });
 
 const vd = ref<HTMLVideoElement>();
-onMounted(() => {
-  const constraints = { audio: false, video: { width: 720, height: 720 } };
 
+onMounted(() => {
+ 
+  const constraints = { audio: false, video: { width: 720, height: 720, deviceId: systemStore.deviceId! },  };
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (media) {
@@ -55,12 +70,13 @@ onMounted(() => {
 <style scoped>
 .camera {
   border-radius: 50%;
+  cursor: move;
+  background-color: aqua;
 }
 video {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   border-style: solid;
-  
 }
 </style>

@@ -4,3 +4,11 @@ export interface ICameraProps {
   borderWidth?: string;
   borderColor?: string;
 }
+
+export interface IConfig {
+  size: number;
+  circle: boolean;
+  hasBorder: boolean;
+  borderWidth: number;
+  borderColor: string;
+}
