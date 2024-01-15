@@ -25,3 +25,24 @@ body {
   width: 100%;
 }
 
+.page {
+  min-height: 300px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #9a9a9a;
+  .content {
+    padding: 24px;
+    min-height: 250px;
+    position: relative;
+    .actions {
+      position: absolute;
+      display: flex;
+      justify-content: end;
+      gap: 16px;
+      bottom: 0px;
+      left: 24px;
+      right: 24px;
+    }
+  }
+}
+

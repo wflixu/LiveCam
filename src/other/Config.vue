@@ -1,14 +1,6 @@
 <template>
   <div class="config">
-    <div
-      class="title"
-      @mousedown="mousedownHandler"
-      @mouseup="mouseupHandler"
-      @mousemove="mousemoveHandler"
-      @mouseleave="mouseleaveHandler"
-    >
-      配置
-    </div>
+    <PageTitle title="配置"></PageTitle>
     <div class="box">
       <div class="row">
         <div class="item left">现在摄像设备：</div>
@@ -64,26 +56,20 @@
       </div>
     </div>
     <div class="actions">
+      <a-button   @click="onBack">返回 </a-button>
       <a-button type="primary" class=""  @click="onSaveConfig"> 保存 </a-button>
-      <a-button  danger @click="onBack">返回 </a-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { PhysicalSize, appWindow } from "@tauri-apps/api/window";
 import { SelectProps } from "ant-design-vue";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useSystemStoreHook } from "../store";
-import { useWinMove } from "../hooks";
+import PageTitle from './components/PageTitle.vue'
 
-const {
-  mousedownHandler,
-  mouseupHandler,
-  mousemoveHandler,
-  mouseleaveHandler,
-} = useWinMove();
+
 
 const router = useRouter();
 const systemStore = useSystemStoreHook();
@@ -106,6 +92,7 @@ const onSaveConfig = async () => {
   if (deviceId.value) {
     systemStore.setDeviceId(deviceId.value);
   }
+
   systemStore.updateConfig({
     size: size.value,
     circle: isCircle.value,
@@ -113,7 +100,6 @@ const onSaveConfig = async () => {
     borderWidth: borderWidth.value,
     borderColor: borderColor.value,
   });
-
   router.push("/");
 };
 
@@ -122,9 +108,7 @@ const onBack = () =>{
 }
 
 onMounted(async () => {
-  const ns = new PhysicalSize(600, 400);
-  await appWindow.setSize(ns);
-
+ 
   const deviceInfos = await navigator.mediaDevices.enumerateDevices();
   if (Array.isArray(deviceInfos)) {
     deviceOptions.value = deviceInfos
@@ -143,21 +127,10 @@ onMounted(async () => {
 <style scoped>
 .config {
   background-color: #fff;
-  .title {
-    height: 32px;
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    background-color: bisque;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: move;
-  }
   .actions {
     padding: 16px 32px;
     display: flex;
-
+    justify-content: flex-end;
     gap: 16px ;
   }
   .box {

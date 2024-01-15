@@ -1,20 +1,43 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, onUnmounted, getCurrentInstance } from "vue";
-import {
-  PhysicalSize,
-  appWindow,
-} from "@tauri-apps/api/window";
-import { listen } from "@tauri-apps/api/event";
-import Camera from "./Camera.vue";
-import SettingBar from "./SettingBar.vue";
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useSystemStoreHook } from "./store";
+const router = useRouter();
+const systemStore = useSystemStoreHook();
+const checkAvailableDevice = () => {
+  setTimeout(async () => {
+    const deviceInfos = await navigator.mediaDevices.enumerateDevices();
+    console.log(deviceInfos)
+    if (!Array.isArray(deviceInfos)) {
+      router.push("/other/error");
+    }
+    const available = deviceInfos.find((item) => {
+      return item.kind == "videoinput" && item.deviceId;
+    });
+    if (available) {
+      systemStore.setDeviceId(available.deviceId);
+    } else {
+      router.push("/other/error");
+    }
+  }, 500);
+};
 
-
-
+onMounted( () => {
+  checkAvailableDevice();
+});
 </script>
 
 <template>
-  <router-view></router-view>
+    <a-config-provider
+    :theme="{
+      token: {
+        colorPrimary: '#4C8B3B',
+      },
+    }"
+  >
+     <router-view></router-view>
+  </a-config-provider>
+ 
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

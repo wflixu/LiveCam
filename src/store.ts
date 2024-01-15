@@ -1,5 +1,5 @@
 import { createPinia, defineStore } from "pinia";
-import { reactive, ref } from "vue";
+import { reactive, ref, toValue } from "vue";
 import { useLocalStorage } from "@vueuse/core";
 import { IConfig } from "./interface";
 
@@ -33,11 +33,16 @@ const useSystemStoreHook = defineStore("system", () => {
     deviceId.value = id;
     window.localStorage.setItem(DEVICE_key, id);
   };
+  const toggleShape = () => {
+    config.circle = !config.circle;
+    window.localStorage.setItem(CONFIG_KEY, JSON.stringify(toValue(config)));
+  };
   return {
     config,
     updateConfig,
     deviceId,
     setDeviceId,
+    toggleShape,
   };
 });
 

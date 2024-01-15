@@ -1,20 +1,35 @@
 <template>
   <div class="settings">
-    <SettingOutlined :style="{color: 'white', fontSize: '20px'}" @click="clickHandler" />
+    <SettingOutlined :style="iconStyle" @click="clickHandler('config')" />
+    <SyncOutlined :style="iconStyle" @click="toggleShape" />
+    <InfoCircleOutlined :style="iconStyle" @click="clickHandler('about')" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, reactive, ref } from "vue";
-import { SettingOutlined } from "@ant-design/icons-vue";
-import { PhysicalPosition, appWindow } from "@tauri-apps/api/window";
-import {useRouter} from 'vue-router';
+import { reactive } from "vue";
+import {
+  SettingOutlined,
+  InfoCircleOutlined,
+  SyncOutlined,
+} from "@ant-design/icons-vue";
+import { useRouter } from "vue-router";
+import { useSystemStoreHook } from "../store";
+const router = useRouter();
 
-const router = useRouter()
+const systemStore = useSystemStoreHook();
 
-const clickHandler = async () =>{
-   router.push('/config')
-}
+const iconStyle = reactive({
+  color: "white",
+  fontSize: "20px",
+});
+const clickHandler = async (key: string) => {
+  router.push(`/other/${key}`);
+};
+const toggleShape = () => {
+  systemStore.toggleShape();
+   window.location.reload()
+};
 </script>
 
 <style scoped>
@@ -29,5 +44,6 @@ const clickHandler = async () =>{
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
 }
 </style>

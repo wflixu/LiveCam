@@ -37,8 +37,9 @@ const styleObj = computed(() => {
 });
 
 const vstyleObj = computed(() => {
+  console.log('--------')
   return {
-    borderRadius: config.circle ? "50%" : "none",
+    borderRadius: systemStore.config.circle ? "50%" : "none",
     borderWidth: config.hasBorder? config.borderWidth + 'px' : '0px',
     borderColor: config.borderColor,
   };
@@ -69,9 +70,7 @@ onMounted(() => {
 
 <style scoped>
 .camera {
-  border-radius: 50%;
   cursor: move;
-  background-color: aqua;
 }
 video {
   width: 100%;
