@@ -1,4 +1,4 @@
-import { PhysicalPosition, appWindow } from "@tauri-apps/api/window";
+import { appWindow, LogicalPosition } from "@tauri-apps/api/window";
 import { ref } from "vue";
 
 export function useWinMove() {
@@ -8,7 +8,7 @@ export function useWinMove() {
   const move = async (evt: MouseEvent) => {
     const { screenX, screenY, pageX, pageY } = evt;
     const [sX, sY] = lastPos.value;
-    const ph = new PhysicalPosition(
+    const ph = new LogicalPosition(
       screenX - pageX + (screenX - sX),
       screenY - pageY + (screenY - sY)
     );
@@ -20,6 +20,7 @@ export function useWinMove() {
     const { screenX, screenY } = evt;
     moving.value = true;
     lastPos.value = [screenX, screenY];
+    console.log('mousedown poiont', lastPos.value)
   };
 
   const mouseupHandler = async (evt: MouseEvent) => {

@@ -42,8 +42,7 @@
       "resources": [],
       "shortDescription": "",
       "targets": [
-        "dmg",
-        "updater"
+        "dmg"
       ],
       "windows": {
         "certificateThumbprint": null,
@@ -55,7 +54,7 @@
       "csp": null
     },
     "updater": {
-      "active": true,
+      "active": false,
       "endpoints": [
         "https://github.com/wflixu/icamera/releases/download/v1.0.3/latest.json"
       ],
