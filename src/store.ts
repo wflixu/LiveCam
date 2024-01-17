@@ -37,6 +37,11 @@ const useSystemStoreHook = defineStore("system", () => {
     config.circle = !config.circle;
     window.localStorage.setItem(CONFIG_KEY, JSON.stringify(toValue(config)));
   };
+
+  const scale = ref(1);
+  const setScale = (n:number) => {
+     scale.value = n;
+  }
   return {
     config,
     updateConfig,
