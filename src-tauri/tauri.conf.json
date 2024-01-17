@@ -8,10 +8,10 @@
   },
   "package": {
     "productName": "icamera",
-    "version": "1.0.2"
+    "version": "1.0.3"
   },
   "tauri": {
-    "macOSPrivateApi":true,
+    "macOSPrivateApi": true,
     "allowlist": {
       "all": true
     },
@@ -43,7 +43,7 @@
       "shortDescription": "",
       "targets": [
         "dmg",
-        "updater"
+        "app"
       ],
       "windows": {
         "certificateThumbprint": null,
@@ -70,9 +70,9 @@
         "alwaysOnTop": true,
         "resizable": false,
         "transparent": true,
-        "hiddenTitle":true,
+        "hiddenTitle": true,
         "decorations": false,
-        "titleBarStyle":"Transparent"
+        "titleBarStyle": "Transparent"
       }
     ]
   }
