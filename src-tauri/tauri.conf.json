@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "icamera",
-    "version": "1.0.4"
+    "version": "1.0.6"
   },
   "tauri": {
     "macOSPrivateApi": true,
@@ -43,7 +43,7 @@
       "shortDescription": "",
       "targets": [
         "dmg",
-        "app"
+        "updater"
       ],
       "windows": {
         "certificateThumbprint": null,
@@ -55,9 +55,9 @@
       "csp": null
     },
     "updater": {
-      "active": false,
+      "active": true,
       "endpoints": [
-        "https://github.com/wflixu/icamera/releases/download/v1.0.4/latest.json"
+        "https://github.com/wflixu/icamera/releases/download/v1.0.7/latest.json"
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQyMEYyMjlBOEFCRjM4RDcKUldUWE9MK0ttaUlQMHFVdmE1cDA5b1l6TmlHTjloWTh4cWw1bGl3WTU1OEg1cmpsam94bCt4RHcK"
