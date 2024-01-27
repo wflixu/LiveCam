@@ -33,7 +33,7 @@
       "identifier": "cn.wflixu.icamera",
       "longDescription": "",
       "macOS": {
-        "entitlements": "info.plist",
+        "entitlements": "Info.plist",
         "exceptionDomain": "",
         "frameworks": [],
         "providerShortName": null,
