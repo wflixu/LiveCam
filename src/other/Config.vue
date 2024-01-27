@@ -1,9 +1,9 @@
 <template>
   <div class="config">
-    <PageTitle title="配置"></PageTitle>
+    <PageTitle title="Config"></PageTitle>
     <div class="box">
       <div class="row">
-        <div class="item left">现在摄像设备：</div>
+        <div class="item left">The current camera：</div>
         <div class="item right">
           <a-select
             ref="select"
@@ -15,13 +15,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="item left">圆形：</div>
+        <div class="item left">Circle：</div>
         <div class="item right">
           <a-switch v-model:checked="isCircle" />
         </div>
       </div>
       <div class="row">
-        <div class="item left">尺寸：</div>
+        <div class="item left">Size：</div>
         <div class="item right">
           <a-input-number
             id="inputNumber"
@@ -32,13 +32,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="item left">边框：</div>
+        <div class="item left">Border：</div>
         <div class="item right">
           <a-switch v-model:checked="hasBorder" />
         </div>
       </div>
       <div class="row">
-        <div class="item left">边框宽度：</div>
+        <div class="item left">Border width：</div>
         <div class="item right">
           <a-input-number
             id="inputNumber"
@@ -49,15 +49,15 @@
         </div>
       </div>
       <div class="row">
-        <div class="item left">边框颜色：</div>
+        <div class="item left">Border color：</div>
         <div class="item right">
           <input type="color" :value="borderColor" @change="onColorChange" />
         </div>
       </div>
     </div>
     <div class="actions">
-      <a-button   @click="onBack">返回 </a-button>
-      <a-button type="primary" class=""  @click="onSaveConfig"> 保存 </a-button>
+      <a-button   @click="onBack">Back </a-button>
+      <a-button type="primary" class=""  @click="onSaveConfig"> Save </a-button>
     </div>
   </div>
 </template>
