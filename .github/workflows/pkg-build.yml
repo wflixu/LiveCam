@@ -11,10 +11,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-         include:
-          - os: macos-latest
-            target: universal-apple-darwin
-    runs-on: ${{ matrix.os }}
+          include:
+            - target: aarch64-apple-darwin
+              platform: macos-latest
+            - target: universal-apple-darwin
+              platform: macos-latest
+    runs-on: ${{ matrix.platform }}
 
     steps:
       - name: Checkout repository
@@ -61,4 +63,5 @@ jobs:
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
           prerelease: false
+          args: --target ${{matrix.target}}
           updaterJsonKeepUniversal: true
