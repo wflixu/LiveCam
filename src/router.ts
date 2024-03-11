@@ -1,9 +1,15 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from "vue-router";
 import Home from "./home/Home.vue";
 import ConfigPage from "./other/Config.vue";
 import Exception from "./other/Exception.vue";
 import AboutVue from "./other/About.vue";
 import OtherPageVue from "./other/OtherPage.vue";
+
+// const AsyncHome =
 const routes = [
   { path: "/", redirect: "/home" },
   { path: "/home", component: Home },
@@ -19,7 +25,7 @@ const routes = [
 ];
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes, // short for `routes: routes`
 });
 

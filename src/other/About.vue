@@ -1,17 +1,17 @@
 <template>
   <div class="page">
-    <PageTitle title="About"></PageTitle>
+    <PageTitle :title="t('about.title')"></PageTitle>
     <div class="content">
       <p>
-        LiveCam is a live desktop camera application. It is not only simple and practical, but also small in size, with an
-        installation package of only 5MB.
+        {{ t('about.desc') }}
       </p>
       <p>
-        If you encounter any problems, you can give feedback here <a href="https://github.com/wflixu/icamera/issues">Github</a>, and we will deal with it in time.
+        {{ t('about.feedback') }}
+    
       </p>
       <div class="actions">
         <a-button type="primary" @click="onBack">
-          Back
+          {{ t('btns.back') }}
         </a-button>
       </div>
     </div>
@@ -22,6 +22,10 @@
 import PageTitle from './components/PageTitle.vue'
 
 import { useRouter } from 'vue-router'
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n()
+
 const router = useRouter();
 const onBack = () => {
   router.push('/home')

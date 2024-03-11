@@ -1,46 +1,28 @@
 <template>
-  <div
-    class="camera"
-    :style="styleObj"
-    @mousedown="mousedownHandler"
-    @mouseup="mouseupHandler"
-    @mousemove="mousemoveHandler"
-    @mouseleave="mouseleaveHandler"
-  >
-    <video ref="vd" :style="vstyleObj"></video>
-  </div>
+  <video ref="vd" :style="vstyleObj" @ended="onErrorHandler"></video>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, computed } from "vue";
-import { useWinMove } from "../hooks";
 import { useSystemStoreHook } from "../store";
+import { useRouter } from "vue-router";
 
-const {
-  mousedownHandler,
-  mouseupHandler,
-  mousemoveHandler,
-  mouseleaveHandler,
-} = useWinMove();
 
+const router = useRouter()
 
 const systemStore = useSystemStoreHook();
 
 const config = systemStore.config;
 
 
-const styleObj = computed(() => {
-  return {
-    width: config.size + 'px',
-    height: config.size + 'px',
-  };
-});
+const onErrorHandler = (err: Event) =>{
+  router.push('/other/error')
+}
 
 const vstyleObj = computed(() => {
-  console.log('--------')
   return {
     borderRadius: systemStore.config.circle ? "50%" : "none",
-    borderWidth: config.hasBorder? config.borderWidth + 'px' : '0px',
+    borderWidth: config.hasBorder ? config.borderWidth + 'px' : '0px',
     borderColor: config.borderColor,
   };
 });
@@ -48,8 +30,8 @@ const vstyleObj = computed(() => {
 const vd = ref<HTMLVideoElement>();
 
 onMounted(() => {
- 
-  const constraints = { audio: false, video: { width: 720, height: 720, deviceId: systemStore.deviceId! },  };
+
+  const constraints = { audio: false, video: { width: 720, height: config.circle? 720: 720/3*2, deviceId: systemStore.deviceId ?? undefined }, };
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (media) {
@@ -64,14 +46,13 @@ onMounted(() => {
     })
     .catch(function (err) {
       console.log(err.name + ": " + err.message);
+      router.push('/other/error')
+       
     }); // 总是在最后检查错误
 });
 </script>
 
 <style scoped>
-.camera {
-  cursor: move;
-}
 video {
   width: 100%;
   height: 100%;

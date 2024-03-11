@@ -8,12 +8,16 @@
   },
   "package": {
     "productName": "LiveCam",
-    "version": "1.0.8"
+    "version": "1.1.0"
   },
   "tauri": {
     "macOSPrivateApi": true,
     "allowlist": {
       "all": true
+    },
+    "systemTray": {
+      "iconPath": "icons/tray-icon.png",
+      "iconAsTemplate": true
     },
     "bundle": {
       "active": true,
@@ -43,8 +47,7 @@
       "shortDescription": "",
       "targets": [
         "dmg",
-        "app",
-        "updater"
+        "app"
       ],
       "windows": {
         "certificateThumbprint": null,
@@ -56,9 +59,13 @@
       "csp": null
     },
     "updater": {
-      "active": true,
+      "active": false,
       "endpoints": [
+<<<<<<< HEAD
+        "https://github.com/wflixu/icamera/releases/download/v1.0.1/latest.json"
+=======
         "https://github.com/wflixu/icamera/releases/download/v1.0.9/latest.json"
+>>>>>>> main
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQyMEYyMjlBOEFCRjM4RDcKUldUWE9MK0ttaUlQMHFVdmE1cDA5b1l6TmlHTjloWTh4cWw1bGl3WTU1OEg1cmpsam94bCt4RHcK"

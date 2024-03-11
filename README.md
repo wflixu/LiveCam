@@ -1,4 +1,4 @@
-# LiveCame
+# LiveCam
 
 视频录像或直播头像
 ### 主界面
@@ -19,6 +19,14 @@ Tauri + Vue 3 + TypeScript
 # 使用
 
 ## 下载
+
+### MacOS App store [下载](https://apps.apple.com/cn/app/livecam/id6476108478?mt=12)
+
+![](public/imgs/appstore.png)
+
+
+
+### window 和 Linux
 
 在 [release](https://github.com/wflixu/icamera/releases) 页面下载
 
