@@ -1,4 +1,4 @@
-# LiveCame
+# LiveCam
 
 视频录像或直播头像
 ### 主界面
