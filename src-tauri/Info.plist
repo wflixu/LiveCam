@@ -2,35 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>NSCameraUsageDescription</key>
-    <string>请允许本程序访问您的摄像头</string>
-    <key>com.apple.security.device.audio-input</key>
-    <true />
-    <key>com.apple.security.device.camera</key>
-    <true />
+    <key>CFBundleExecutable</key>
+    <string>LiveCam</string>
     <key>NSCameraUseContinuityCameraDeviceType</key>
-    <true />
-    <key>com.apple.security.cs.allow-jit</key>
-    <true/>
-    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
-    <true/>
-    <key>com.apple.security.cs.disable-library-validation</key>
-    <true/>
-    <key>com.apple.security.cs.allow-dyld-environment-variables</key>
-    <true/>
-    <key>com.apple.security.automation.apple-events</key>
-    <true/>
-    <key>com.apple.security.device.usb</key>
-    <true/>
-    <key>com.apple.security.network.server</key>
-    <true/>
-    <key>com.apple.security.network.client</key>
-    <true/>
-    <key>com.apple.security.inherit</key>
     <true/>
     <key>NSCameraUsageDescription</key>
-    <string>Request camera access for WebRTC</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Request microphone access for WebRTC</string>
+    <string>拍摄显示头像</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>13</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
   </dict>
 </plist>

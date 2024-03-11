@@ -1,5 +1,5 @@
 import { createPinia, defineStore } from "pinia";
-import { reactive, ref, toValue } from "vue";
+import { MaybeRef, reactive, ref, toValue, unref } from "vue";
 import { useLocalStorage } from "@vueuse/core";
 import { IConfig } from "./interface";
 
@@ -9,6 +9,12 @@ const DEVICE_key = "ICAMERA_DEVICE_ID";
 const configStr = window.localStorage.getItem(CONFIG_KEY);
 
 const useSystemStoreHook = defineStore("system", () => {
+  const devicesChecking = ref(false);
+
+  const setChecking = (state: MaybeRef<boolean>) => {
+    devicesChecking.value = unref(state);
+  };
+
   const config = reactive<IConfig>(
     configStr
       ? JSON.parse(configStr)
@@ -17,7 +23,7 @@ const useSystemStoreHook = defineStore("system", () => {
           circle: true,
           hasBorder: true,
           borderWidth: 2,
-          borderColor: "#999999",
+          borderColor: "#4C8B3B",
         }
   );
 
@@ -39,15 +45,23 @@ const useSystemStoreHook = defineStore("system", () => {
   };
 
   const scale = ref(1);
-  const setScale = (n:number) => {
-     scale.value = n;
-  }
+  const setScale = (n: number) => {
+    scale.value = n;
+  };
+
+  const refresh = () => {
+    deviceId.value = "";
+  };
   return {
     config,
+
     updateConfig,
     deviceId,
     setDeviceId,
     toggleShape,
+    devicesChecking,
+    setChecking,
+    refresh,
   };
 });
 

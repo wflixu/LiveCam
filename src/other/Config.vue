@@ -1,63 +1,48 @@
 <template>
   <div class="config">
-    <PageTitle title="Config"></PageTitle>
+    <PageTitle :title="t('config.title')"></PageTitle>
     <div class="box">
       <div class="row">
-        <div class="item left">The current camera：</div>
+        <div class="item left">{{ t('config.the_current_camera') }}</div>
         <div class="item right">
-          <a-select
-            ref="select"
-            v-model:value="deviceId"
-            style="width: 160px"
-            :options="deviceOptions"
-            @change="handleChange"
-          ></a-select>
+          <a-select ref="select" v-model:value="deviceId" style="width: 160px" :options="deviceOptions"
+            @change="handleChange"></a-select>
         </div>
       </div>
       <div class="row">
-        <div class="item left">Circle：</div>
+        <div class="item left">{{ t('config.circle') }}</div>
         <div class="item right">
           <a-switch v-model:checked="isCircle" />
         </div>
       </div>
       <div class="row">
-        <div class="item left">Size：</div>
+        <div class="item left">{{ t('config.size') }}</div>
         <div class="item right">
-          <a-input-number
-            id="inputNumber"
-            v-model:value="size"
-            :min="20"
-            :max="720"
-          />
+          <a-input-number id="inputNumber" v-model:value="size" :min="20" :max="720" />
         </div>
       </div>
       <div class="row">
-        <div class="item left">Border：</div>
+        <div class="item left">{{ t("config.border") }}</div>
         <div class="item right">
           <a-switch v-model:checked="hasBorder" />
         </div>
       </div>
       <div class="row">
-        <div class="item left">Border width：</div>
+        <div class="item left">{{ t('config.border_width') }}</div>
         <div class="item right">
-          <a-input-number
-            id="inputNumber"
-            v-model:value="borderWidth"
-            :min="0"
-            :max="200"
-          />
+          <a-input-number id="inputNumber" v-model:value="borderWidth" :min="0" :max="200" />
         </div>
       </div>
       <div class="row">
-        <div class="item left">Border color：</div>
+        <div class="item left">{{ t("config.border_color") }}</div>
         <div class="item right">
           <input type="color" :value="borderColor" @change="onColorChange" />
         </div>
       </div>
     </div>
     <div class="actions">
-      <a-button   @click="onBack">Back </a-button>
-      <a-button type="primary" class=""  @click="onSaveConfig"> Save </a-button>
+      <a-button @click="onBack">{{ t('btns.back') }} </a-button>
+      <a-button type="primary" class="" @click="onSaveConfig"> {{ t("btns.save") }} </a-button>
     </div>
   </div>
 </template>
@@ -69,7 +54,8 @@ import { useRouter } from "vue-router";
 import { useSystemStoreHook } from "../store";
 import PageTitle from './components/PageTitle.vue'
 
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n()
 
 const router = useRouter();
 const systemStore = useSystemStoreHook();
@@ -83,8 +69,8 @@ const hasBorder = ref<boolean>(config.hasBorder);
 const borderWidth = ref<number>(config.borderWidth);
 const borderColor = ref<string>(config.borderColor);
 
-const handleChange = () => {};
-const onColorChange = (evt: any ) => {
+const handleChange = () => { };
+const onColorChange = (evt: any) => {
   borderColor.value = evt.target.value;
 };
 
@@ -103,12 +89,12 @@ const onSaveConfig = async () => {
   router.push("/");
 };
 
-const onBack = () =>{
+const onBack = () => {
   router.push("/");
 }
 
 onMounted(async () => {
- 
+  
   const deviceInfos = await navigator.mediaDevices.enumerateDevices();
   if (Array.isArray(deviceInfos)) {
     deviceOptions.value = deviceInfos
@@ -127,17 +113,20 @@ onMounted(async () => {
 <style scoped>
 .config {
   background-color: #fff;
+  width: 100vw;
   .actions {
     padding: 16px 32px;
     display: flex;
     justify-content: flex-end;
-    gap: 16px ;
+    gap: 16px;
   }
+
   .box {
     border: 1px solid #ddd;
     border-radius: 4px;
     margin: 24px;
   }
+
   .row {
     padding: 4px 8px;
     margin-top: 4px;
@@ -146,8 +135,9 @@ onMounted(async () => {
     grid-template-columns: 1fr 1fr;
     gap: 12px 12px;
     align-items: center;
-    .left {
-    }
+
+    .left {}
+
     .right {
       display: inline-flex;
       justify-content: end;
