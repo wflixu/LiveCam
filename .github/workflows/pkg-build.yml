@@ -11,12 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-         include:
-          - os: macos-latest
-            target: aarch64-apple-darwin
-          - os: macos-latest
-            target: x86_64-apple-darwin
-    runs-on: ${{ matrix.os }}
+          include:
+            - target: aarch64-apple-darwin
+              platform: macos-latest
+    runs-on: ${{ matrix.platform }}
 
     steps:
       - name: Checkout repository
@@ -29,7 +27,10 @@ jobs:
         uses: swatinem/rust-cache@v2
         with:
           workspaces: './src-tauri -> target'
-        
+      - name: install dependencies (mac only)
+        if: matrix.platform == 'macos-latest'
+        run: |
+            rustup target add aarch64-apple-darwin
       - name: setup pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -45,7 +46,7 @@ jobs:
         run: pnpm install # Change this to npm, yarn or pnpm.
 
       - name: Build the app
-        uses: tauri-apps/tauri-action@v0
+        uses: tauri-apps/tauri-action@dev
         env:
           CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -63,4 +64,5 @@ jobs:
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
           prerelease: false
+          args: --target ${{matrix.target}}
           updaterJsonKeepUniversal: true
