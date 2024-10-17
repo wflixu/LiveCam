@@ -9,11 +9,14 @@
     "devUrl": "http://localhost:1420",
     "frontendDist": "../dist"
   },
+   
   "bundle": {
     "active": true,
-    "category": "Utility",
+    "category": "Utilities",
     "copyright": "",
-    "licenseFile": "",
+    "deb": {
+      "depends": []
+    },
     "externalBin": [],
     "icon": [
       "icons/32x32.png",
@@ -23,17 +26,9 @@
       "icons/icon.ico"
     ],
     "longDescription": "",
-    "linux": {
-      "deb": {
-        "files": {}
-      }
-    },
     "macOS": {
-      "entitlements": "./Entitlements.plist",
+      "entitlements": null,
       "exceptionDomain": "",
-      "files": {
-        "embedded.provisionprofile": "./entitlements/Mac_App_Distribution_icamera.provisionprofile"
-      },
       "frameworks": [],
       "providerShortName": null,
       "signingIdentity": null
@@ -50,21 +45,26 @@
       "timestampUrl": ""
     }
   },
-  "plugins": {
-    "updater": {
-      "endpoints": [
-        "https://github.com/wflixu/icamera/releases/download/v1.0.1/latest.json"
-      ]
-    }
-  },
   "app": {
     "macOSPrivateApi": true,
-    "trayIcon": {
+    "allowlist": {
+      "all": true
+    },
+    "systemTray": {
       "iconPath": "icons/tray-icon.png",
       "iconAsTemplate": true
     },
+  
     "security": {
       "csp": null
+    },
+    "updater": {
+      "active": false,
+      "endpoints": [
+        "https://github.com/wflixu/icamera/releases/download/v1.0.1/latest.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQyMEYyMjlBOEFCRjM4RDcKUldUWE9MK0ttaUlQMHFVdmE1cDA5b1l6TmlHTjloWTh4cWw1bGl3WTU1OEg1cmpsam94bCt4RHcK"
     },
     "windows": [
       {

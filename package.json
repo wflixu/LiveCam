@@ -1,11 +1,7 @@
 {
   "name": "livecam",
   "private": true,
-<<<<<<< HEAD
   "version": "1.1.0",
-=======
-  "version": "1.0.8",
->>>>>>> main
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,7 +14,8 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@tauri-apps/api": "^1.5.3",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-shell": "^2",
     "@vueuse/core": "^10.7.2",
     "ant-design-vue": "4.x",
     "os-locale": "^6.0.2",
@@ -28,11 +25,11 @@
     "vue-router": "4"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.5.9",
+    "@tauri-apps/cli": "^2.0.3",
     "@types/node": "^18.7.10",
-    "@vitejs/plugin-vue": "^5.0.2",
+    "@vitejs/plugin-vue": "^5.0.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.11",
-    "vue-tsc": "^1.8.27"
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.22"
   }
 }

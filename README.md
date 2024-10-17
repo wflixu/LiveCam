@@ -1,6 +1,28 @@
+
+![](./app-icon.png)
+
 # LiveCam
 
 视频录像或直播头像
+
+Tauri + Vue 3 + TypeScript
+
+
+# Download
+
+### MacOS App store 
+[<img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-mac-app-store.svg">](https://apps.apple.com/cn/app/livecam/id6476108478?mt=12)
+
+
+### window 和 Linux
+
+Navigate to the  [release](https://github.com/wflixu/icamera/releases)  page and select the installer that matches your platform.
+
+
+<img src="public/imgs/download.jpg"/>
+
+
+# Document
 ### 主界面
 <img src="public/imgs/preview.jpg"/>
 
@@ -11,30 +33,8 @@
 
 
 
-# 技术栈
 
-Tauri + Vue 3 + TypeScript
-
-
-# 使用
-
-## 下载
-
-### MacOS App store [下载](https://apps.apple.com/cn/app/livecam/id6476108478?mt=12)
-
-![](public/imgs/appstore.png)
-
-
-
-### window 和 Linux
-
-在 [release](https://github.com/wflixu/icamera/releases) 页面下载
-
-<img src="public/imgs/download.jpg"/>
-
-
-
-## 本地构建
+# 本地构建
 
 本地构建
 
