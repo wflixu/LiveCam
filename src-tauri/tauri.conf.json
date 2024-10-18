@@ -59,10 +59,6 @@
   },
   "app": {
     "macOSPrivateApi": true,
-    "trayIcon": {
-      "iconPath": "icons/tray-icon.png",
-      "iconAsTemplate": true
-    },
     "security": {
       "csp": null
     },
