@@ -25,3 +25,4 @@ dist-ssr
 *.sln
 *.sw?
 config/entitlements/Mac_App_Distribution_icamera.provisionprofile
+src-tauri/entitlements/*

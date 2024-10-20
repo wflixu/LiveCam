@@ -9,9 +9,6 @@
     "core:default",
     "core:window:allow-set-position",
     "core:window:allow-set-size",
-    "core:menu:allow-items",
-    "core:menu:allow-append",
-    "core:menu:allow-set-as-help-menu-for-nsapp",
     "shell:allow-open"
   ]
 }
