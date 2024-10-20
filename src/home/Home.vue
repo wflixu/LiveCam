@@ -1,9 +1,9 @@
-<script setup lang="ts" >
-import { onMounted, reactive, ref, onUnmounted, getCurrentInstance } from "vue";
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import {
   LogicalSize,
-  appWindow,
+  getCurrentWindow,
 } from "@tauri-apps/api/window";
 
 import Camera from "./Camera.vue";
@@ -12,6 +12,8 @@ import { useSystemStoreHook } from "../store";
 import { useCheckAvaibleCamrea, useWinMove } from "../hooks";
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
+
+const appWindow = getCurrentWindow();
 
 const {
   mousedownHandler,
@@ -37,7 +39,7 @@ const mouseleaveHandler2 = (event: MouseEvent) => {
 
 onMounted(async () => {
   const cw = config.size;
-  const ph = new LogicalSize(cw,config.circle? cw: cw/3*2)
+  const ph = new LogicalSize(cw, config.circle ? cw : cw / 3 * 2)
   await appWindow.setSize(ph);
 });
 
@@ -71,18 +73,20 @@ onMounted(async () => {
   justify-content: center;
   align-items: center;
   height: 100%;
+
   .mask {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 32px;
-    cursor:move;
+    cursor: move;
     z-index: 1;
   }
 
   .loading {
     text-align: center;
+
     p {
       color: #666;
     }

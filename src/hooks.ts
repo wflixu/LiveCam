@@ -1,4 +1,4 @@
-import { appWindow, LogicalPosition } from "@tauri-apps/api/window";
+import { LogicalPosition, getCurrentWindow } from "@tauri-apps/api/window";
 import { ref } from "vue";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
@@ -7,7 +7,7 @@ import { useSystemStoreHook } from "./store";
 export function useWinMove() {
   const moving = ref(false);
   const lastPos = ref<number[]>([]);
-
+  const appWindow = getCurrentWindow();
   const move = async (evt: MouseEvent) => {
     const { screenX, screenY, pageX, pageY } = evt;
     const [sX, sY] = lastPos.value;
@@ -33,6 +33,7 @@ export function useWinMove() {
   };
 
   const mousemoveHandler = async (evt: MouseEvent) => {
+    console.log("mousemove");
     if (moving.value) {
       console.log("mousemove");
       await move(evt);
